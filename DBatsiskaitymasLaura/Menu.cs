@@ -21,6 +21,7 @@ namespace DBatsiskaitymasLaura
             _studentMenu = new StudentMenu(_context);
             _departmentMenu = new DepartmentMenu(_context);
             _lectureMenu = new LectureMenu(_context);
+            _displayMenu = new DisplayMenu(_context);
         }
         public void ShowMenu()
         {
@@ -30,7 +31,7 @@ namespace DBatsiskaitymasLaura
                 try
                 {
                     Console.WriteLine("\n1. Sukurti departamenta" +
-                        "\n2. Studentas \n3. Paskaita \n4. Atvaizdavimas ");
+                        "\n2. Studentas \n3. Paskaita \n4. Atvaizdavimas \nq. Iseiti");
 
                     char choice = Console.ReadKey().KeyChar;
                     Console.Clear();
@@ -49,6 +50,8 @@ namespace DBatsiskaitymasLaura
                         case '4':
                             _displayMenu.ShowMenu();
                             break;
+                        case 'q':
+                            return;
                     }
                 }
                 catch (Exception)

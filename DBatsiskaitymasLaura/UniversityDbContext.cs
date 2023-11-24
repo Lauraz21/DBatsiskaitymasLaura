@@ -21,8 +21,6 @@ namespace DBatsiskaitymasLaura
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<DepartmentLecture>()
                 .HasKey(dl => new {dl.DepartmentID, dl.LectureID });
 
@@ -30,7 +28,6 @@ namespace DBatsiskaitymasLaura
                 .HasOne(dl => dl.Department)
                 .WithMany(d => d.DepartmentLectures)
                 .HasForeignKey(dl => dl.DepartmentID);
-
 
             modelBuilder.Entity<StudentLecture>()
               .HasKey(sl => new {sl.StudentID, sl.LectureID });
@@ -41,5 +38,4 @@ namespace DBatsiskaitymasLaura
                 .HasForeignKey(sl => sl.StudentID);
         }
     }
-
 }

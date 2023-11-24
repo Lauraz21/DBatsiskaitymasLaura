@@ -22,6 +22,18 @@ namespace DBatsiskaitymasLaura
 
             Console.WriteLine("Iveskite departamento koda: ");
             department.DepartmentCode = Console.ReadLine();
+
+            List<string> validationErrors = department.Validate();
+            if (validationErrors.Count > 0)
+            {
+                Console.WriteLine("\nNeteisingi duomenys");
+                foreach (string error in validationErrors)
+                {
+                    Console.WriteLine(error);
+                }
+                Console.ReadKey();
+                return;
+            }
             _context.Departments.Add(department);
             _context.SaveChanges();
 

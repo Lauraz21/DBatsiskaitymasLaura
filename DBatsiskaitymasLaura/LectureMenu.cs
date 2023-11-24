@@ -51,6 +51,19 @@ namespace DBatsiskaitymasLaura
 
             Console.WriteLine("Iveskite kreditus: ");
             lecture.Credits = int.Parse(Console.ReadLine());
+
+            List<string> validationErrors = lecture.Validate();
+            if (validationErrors.Count > 0)
+            {
+                Console.WriteLine("\nNeteisingi duomenys");
+                foreach (string error in validationErrors)
+                {
+                    Console.WriteLine(error);
+                }
+                Console.ReadKey();
+                return;
+            }
+
             _context.Lectures.Add(lecture);
             _context.SaveChanges();
         }

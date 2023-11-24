@@ -16,26 +16,32 @@ namespace DBatsiskaitymasLaura
         }
         public void ShowMenu()
         {
-            Console.WriteLine("1. Sukurti studenta \n2. Priskirti departamenta \n3. Priskirti paskaita");
-
-            char choice = Console.ReadKey().KeyChar;
-            Console.Clear();
-
-            switch (choice)
+            while (true)
             {
-                case '1':
-                    CreateStudent();
-                    break;
+                Console.WriteLine("1. Sukurti studenta \n2. Priskirti departamenta \n3. Priskirti paskaita \nq - grizti");
 
-                case '2':
-                    ApplyDepartment();
-                    break;
+                char choice = Console.ReadKey().KeyChar;
+                Console.Clear();
 
-                case '3':
-                    AddLecture();
-                    break;
+                switch (choice)
+                {
+                    case '1':
+                        CreateStudent();
+                        break;
+
+                    case '2':
+                        ApplyDepartment();
+                        break;
+
+                    case '3':
+                        AddLecture();
+                        break;
+
+                    case 'q':
+                        return;
+                }
+                Console.Clear();
             }
-            Console.Clear();
         }
 
         private void CreateStudent()
@@ -53,6 +59,18 @@ namespace DBatsiskaitymasLaura
             Console.WriteLine("Iveskite studento koda: ");
             student.StudentCode = int.Parse(Console.ReadLine());
 
+            List<string> validationErrors = student.Validate();
+            if (validationErrors.Count > 0)
+            {
+                Console.WriteLine("Neteisingi duomenys"); 
+                foreach(string error in validationErrors)
+                {
+                    Console.WriteLine(error);
+                }
+                Console.ReadKey();
+                return;
+            }
+
             Console.WriteLine("Iveskite departamento koda: ");
             string departmentCode = Console.ReadLine();
             Department department = _context.Departments.First(department => department.DepartmentCode == departmentCode);
@@ -64,6 +82,8 @@ namespace DBatsiskaitymasLaura
             department.Students.Add(student);
             _context.Students.Add(student);
             _context.SaveChanges();
+            Console.WriteLine("Studentas sukurtas");
+            Console.ReadKey();
         }
 
         private void ApplyDepartment()

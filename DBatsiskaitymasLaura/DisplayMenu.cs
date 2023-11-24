@@ -9,13 +9,11 @@ namespace DBatsiskaitymasLaura
 {
     public class DisplayMenu
     {
-
         private UniversityDbContext _context;
         public DisplayMenu(UniversityDbContext context)
         {
             _context = context;
         }
-
         public void ShowMenu()
         {
 
@@ -43,12 +41,14 @@ namespace DBatsiskaitymasLaura
         {
             Console.WriteLine("Iveskite departamento koda: ");
             string departmentCode = Console.ReadLine();
-            Department department = _context.Departments.First(department => department.DepartmentCode == departmentCode);
+            Department department = _context.Departments.Where(department => department.DepartmentCode == departmentCode).Include(d => d.Students).First();
 
             foreach (Student student in department.Students)
             {
-                Console.WriteLine($"Vardas: {student.Name} \nPavarde: {student.LastName} \nEl. pastas: {student.Email} \nKodas: {student.StudentCode}");
+                Console.WriteLine($"\nVardas: {student.Name} \nPavarde: {student.LastName} \nEl. pastas: {student.Email} \nKodas: {student.StudentCode}\n");
             }
+            Console.WriteLine("\nSpauskite bet koki mygtuka, kad testumete");
+            Console.ReadKey();
         }
         private void DisplayDepartmentLectures()
         {
@@ -60,8 +60,10 @@ namespace DBatsiskaitymasLaura
             foreach (DepartmentLecture departmentLecture in departmentLectures)
             {
                 Lecture lecture = departmentLecture.Lecture;
-                Console.WriteLine($"Pavadinimas: {lecture.Name} \nPaskaitos laikas: {lecture.Start}h-{lecture.End}h \nPaskaitos kodas: {lecture.LectureCode} \nPaskaitos kreditai: {lecture.Credits}");
+                Console.WriteLine($"\nPavadinimas: {lecture.Name} \nPaskaitos laikas: {lecture.Start}h-{lecture.End}h \nPaskaitos kodas: {lecture.LectureCode} \nPaskaitos kreditai: {lecture.Credits}\n");
             }
+            Console.WriteLine("\nSpauskite bet koki mygtuka, kad testumete");
+            Console.ReadKey();
         }
         private void DisplayLecturesByStudent()
         {
@@ -73,8 +75,10 @@ namespace DBatsiskaitymasLaura
             foreach (StudentLecture studentLecture in studentLectures)
             {
                 Lecture lecture = studentLecture.Lecture;
-                Console.WriteLine($"Pavadinimas: {lecture.Name} \nPaskaitos laikas: {lecture.Start}h-{lecture.End}h \nPaskaitos kodas: {lecture.LectureCode} \nPaskaitos kreditai: {lecture.Credits}");
+                Console.WriteLine($"\nPavadinimas: {lecture.Name} \nPaskaitos laikas: {lecture.Start}h-{lecture.End}h \nPaskaitos kodas: {lecture.LectureCode} \nPaskaitos kreditai: {lecture.Credits}\n");
             }
+            Console.WriteLine("\nSpauskite bet koki mygtuka, kad testumete");
+            Console.ReadKey();
         }
     }
 }
