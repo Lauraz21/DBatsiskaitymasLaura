@@ -21,7 +21,7 @@ namespace DBatsiskaitymasLaura
             List<string> errors = new List<string>();
             if (Name.Length < 3 || Name.Length > 100)
             {
-                errors.Add("Pavdinimas turi buti tarp 3 - 100 simboliu");
+                errors.Add("Pavadinimas turi buti tarp 3 - 100 simboliu");
             }
             if (DepartmentCode.Length != 6)
             {
@@ -30,5 +30,4 @@ namespace DBatsiskaitymasLaura
             return errors;
         }
     }
-
 }

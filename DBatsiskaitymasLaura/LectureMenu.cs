@@ -15,7 +15,6 @@ namespace DBatsiskaitymasLaura
         {
             _context = context;
         }
-      
         public void ShowMenu()
         {
             Console.WriteLine("1. Sukurti paskaita \n2. Prideti paskaita i departamenta");
@@ -76,11 +75,13 @@ namespace DBatsiskaitymasLaura
             Console.WriteLine("Iveskite paskaitos koda: ");
             int lectureCode = int.Parse(Console.ReadLine());
             Lecture lectureToAdd = _context.Lectures.First(lecture => lecture.LectureCode == lectureCode);
+
             if (department.DepartmentLectures is null)
             {
                 department.DepartmentLectures = new List<DepartmentLecture>();
             }
-            department.DepartmentLectures.Add(new DepartmentLecture() { Lecture = lectureToAdd, Department = department });
+            department.DepartmentLectures.Add(new DepartmentLecture()
+            { Lecture = lectureToAdd, Department = department });
             _context.SaveChanges();
         }
     }

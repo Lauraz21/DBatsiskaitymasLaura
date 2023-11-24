@@ -9,7 +9,6 @@ namespace DBatsiskaitymasLaura
 {
     public class Menu
     {
-        private UniversityDbContext _context;
         private StudentMenu _studentMenu;
         private DepartmentMenu _departmentMenu;
         private LectureMenu _lectureMenu;
@@ -17,11 +16,11 @@ namespace DBatsiskaitymasLaura
 
         public Menu()
         {
-            _context = new UniversityDbContext();
-            _studentMenu = new StudentMenu(_context);
-            _departmentMenu = new DepartmentMenu(_context);
-            _lectureMenu = new LectureMenu(_context);
-            _displayMenu = new DisplayMenu(_context);
+            UniversityDbContext context = new UniversityDbContext();
+            _studentMenu = new StudentMenu(context);
+            _departmentMenu = new DepartmentMenu(context);
+            _lectureMenu = new LectureMenu(context);
+            _displayMenu = new DisplayMenu(context);
         }
         public void ShowMenu()
         {

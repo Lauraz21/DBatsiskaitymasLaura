@@ -16,7 +16,6 @@ namespace DBatsiskaitymasLaura
         }
         public void ShowMenu()
         {
-
             Console.WriteLine("1. Atvaizduoti departamento studentus \n2. Atvaizduoti departamento paskaita \n3. Atvaizduoti paskaitas pagal studenta ");
             char choice = Console.ReadKey().KeyChar;
             Console.Clear();

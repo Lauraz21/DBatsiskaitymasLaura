@@ -18,7 +18,7 @@ namespace DBatsiskaitymasLaura
         {
             while (true)
             {
-                Console.WriteLine("1. Sukurti studenta \n2. Priskirti departamenta \n3. Priskirti paskaita \nq - grizti");
+                Console.WriteLine("1. Sukurti studenta \n2. Priskirti departamenta \n3. Priskirti paskaita \nq. grizti");
 
                 char choice = Console.ReadKey().KeyChar;
                 Console.Clear();
@@ -43,7 +43,6 @@ namespace DBatsiskaitymasLaura
                 Console.Clear();
             }
         }
-
         private void CreateStudent()
         {
             Console.WriteLine("Iveskite varda: ");
@@ -79,10 +78,11 @@ namespace DBatsiskaitymasLaura
             {
                 department.Students = new List<Student>();
             }
+
             department.Students.Add(student);
             _context.Students.Add(student);
             _context.SaveChanges();
-            Console.WriteLine("Studentas sukurtas");
+            Console.WriteLine("\nStudentas sukurtas");
             Console.ReadKey();
         }
 
@@ -95,10 +95,14 @@ namespace DBatsiskaitymasLaura
             Console.WriteLine("Iveskite departamento koda: ");
             string departmentCode = Console.ReadLine();
             Department department = _context.Departments.First(department => department.DepartmentCode == departmentCode);
+
+            if (department.Students is null)
+            {
+                department.Students = new List<Student>();
+            }
             department.Students.Add(student);
             _context.SaveChanges();
         }
-
         private void AddLecture()
         {
             Console.WriteLine("Iveskite studento koda: ");
@@ -113,7 +117,8 @@ namespace DBatsiskaitymasLaura
             {
                 student.StudentLectures = new List<StudentLecture>();
             }
-            student.StudentLectures.Add(new StudentLecture() { Lecture = lectureToAdd, Student = student });
+            student.StudentLectures.Add(new StudentLecture() 
+            { Lecture = lectureToAdd, Student = student });
             _context.SaveChanges();
         }
     }

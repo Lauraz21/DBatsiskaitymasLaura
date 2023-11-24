@@ -23,7 +23,7 @@ namespace DBatsiskaitymasLaura
             List<string> errors = new List<string>();
             if (Name.Length <5)
             {
-                errors.Add("Pavdinimas turi buti ne maziau kaip 5 simboliai");
+                errors.Add("Pavadinimas turi buti ne maziau kaip 5 simboliai");
             }
             if (Start < 7 || Start > 18 )
             {
